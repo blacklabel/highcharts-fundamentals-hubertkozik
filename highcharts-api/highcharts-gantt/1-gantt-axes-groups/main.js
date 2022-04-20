@@ -1,5 +1,20 @@
 Highcharts.ganttChart('container', {
 
+    xAxis: [{
+        type: 'datetime',
+        dateTimeLabelFormats: {
+            week: {
+                list: ['%A, %e %b, %Y']
+            }
+        },
+    },
+    {
+        opposite: false,
+        visible: false,
+    }],
+    yAxis: {
+        uniqueNames: true,
+    },
     series: [{
         name: 'Project 1',
         data: [{
@@ -16,7 +31,7 @@ Highcharts.ganttChart('container', {
         }, {
             name: 'Second',
             start: 1561507200000,
-            end: 1561680000000
+            end: 1561680000000,
         }]
     }]
 
