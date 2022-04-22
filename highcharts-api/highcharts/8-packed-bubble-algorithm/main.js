@@ -40,7 +40,7 @@ Highcharts.chart('container', {
         height: 800,
         events: {
             load: function() {
-                setInterval(()=>movePoint(this), 500);
+                setInterval(()=>movePoint(this), 1500);
             }
         }
     },
