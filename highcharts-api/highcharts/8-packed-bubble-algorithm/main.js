@@ -34,12 +34,17 @@ const getRandomItem = (array) => {
                             repNode.marker.radius +
                             bubblePadding));
                     // TODO padding configurable
+                    // const dist = 0.15;
+                    // if (distanceR > -1 * dist && distanceR < dist) {
+                    //     const randomColor = '#'+Math.floor(Math.random()*16777215).toString(16);
+                    //     repNode.color = randomColor;
+                    // }
                     if (distanceR < 0) {
                         node.degree += 0.01;
                         node.neighbours++;
                         force = layout.repulsiveForce(-distanceR / Math.sqrt(node.neighbours), layout.k, node, repNode);
                     }
-                    if (force>4) {
+                    if (force > 4) {
                         const randomColor = '#'+Math.floor(Math.random()*16777215).toString(16);
                         repNode.color = randomColor;
                     }
