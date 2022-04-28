@@ -39,9 +39,12 @@ const getRandomItem = (array) => {
                         node.neighbours++;
                         force = layout.repulsiveForce(-distanceR / Math.sqrt(node.neighbours), layout.k, node, repNode);
                     }
-                    if (force>4) {
+                    if (distanceR < 0.15 && repNode.isParentNode) { //if (force > 4 && repNode.isParentNode) { 
                         const randomColor = '#'+Math.floor(Math.random()*16777215).toString(16);
                         repNode.color = randomColor;
+                        repNode.marker.fillColor = randomColor;
+                        repNode.marker.lineColor = randomColor;
+                        repNode.series.color = randomColor;
                     }
                     layout.force('repulsive', node, force * repNode.mass, distanceXY, repNode, distanceR);
                     
@@ -59,12 +62,24 @@ Highcharts.chart('container', {
     plotOptions: {
         packedbubble: {
             minSize: '20%',
-            maxSize: '100%',
+            maxSize: '70%',
             zMin: 0,
             zMax: 1000,
+            layoutAlgorithm: {
+                splitSeries: true,
+                seriesInteraction: false,
+                dragBetweenSeries: true,
+                parentNodeLimit: true
+            }
         }
     },
     series: [{
+        data: getData(1, 50, 3)
+    },
+    {
+        data: getData(1, 50, 3)
+    },
+    {
         data: getData(1, 50, 3)
     }]
 });
