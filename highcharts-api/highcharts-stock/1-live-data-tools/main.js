@@ -49,7 +49,6 @@ Highcharts.stockChart('container1', {
     plotOptions: {
         series: {
             dataGrouping: {
-                //groupPixelWidth: 100
                 forced: true, 
                 units: [ 
                     ['minute', [1]] 
@@ -57,6 +56,8 @@ Highcharts.stockChart('container1', {
             }
         }
     },
+
+    yAxis: [{},{},{}],
 
     rangeSelector: {
         buttons: [{
@@ -90,6 +91,7 @@ Highcharts.stockChart('container1', {
         type: 'sma',
         linkedTo: 'randomData1',
         zIndex: 1,
+        yAxis: 1,
         marker: {
             enabled: false
         }
@@ -97,6 +99,7 @@ Highcharts.stockChart('container1', {
         type: 'linearRegression',
         linkedTo: 'randomData1',
         zIndex: -1,
+        yAxis: 2,
         params: {
             period: 15
         }
@@ -112,29 +115,10 @@ Highcharts.stockChart('container2', {
         }
     },
 
-    navigation: {
-        bindings: {
-            dataGrouping: {
-                className: 'highcharts-dataGrouping',
-                init: function(e) {
-                    chart.series[0].update({ 
-                        dataGrouping: { 
-                            forced: true, 
-                            units: [ 
-                                ['week', [1]] 
-                            ] 
-                        } 
-                    })
-                    debugger;
-                }
-            }
-        }
-    },
-
     rangeSelector: {
         buttons: [{
             type: 'second',
-           //count: 3,
+            //count: 3,
             text: 'Second',
             dataGrouping: {
                 forced: true,
@@ -162,14 +146,6 @@ Highcharts.stockChart('container2', {
         inputEnabled: false,
         selected: 0
     },
-
-    time: {
-        useUTC: false
-    },  
-
-    xAxis: {
-        minRange: 1000
-      },
 
     series: [{
         name: 'Random data 2',
