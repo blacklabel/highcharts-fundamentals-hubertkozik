@@ -5,28 +5,30 @@ const getData = (min, max, count) => {
 }
 
 const getRandomItem = (array) => { 
-    return array[Math.floor(Math.random()*array.length)]; 
+    return array[Math.floor(Math.random() * array.length)]; 
+}
+
+function getRandomItems(array, n) {
+    return array.sort(() => .5 - Math.random()).slice(0, n);
 }
 
 const movePoint = chart => {
-    let seriesFrom = getRandomItem(chart.series),
-        seriesTo = getRandomItem(chart.series);
+    let randomItems = getRandomItems(chart.series, 2),
+        seriesFrom = randomItems[0],
+        seriesTo = randomItems[1];
 
-    while(seriesFrom.data.length === 1){ // to avoid empty parent node
-        seriesFrom = getRandomItem(chart.series);
+    while (seriesFrom.data.length === 1){ // to avoid empty parent node
+        randomItems = getRandomItems(chart.series, 2),
+        seriesFrom = randomItems[0],
+        seriesTo = randomItems[1];
     }
 
-    while(chart.series.indexOf(seriesFrom) === chart.series.indexOf(seriesTo)){ // exclude seriesFrom
-        seriesTo = getRandomItem(chart.series);
-    }
-
-    const pointToMove = getRandomItem(seriesFrom.data)
-        indexOfPointToMove = seriesFrom.data.indexOf(pointToMove),
+    const pointToMove = getRandomItem(seriesFrom.data),
         value = pointToMove.options.value,
         plotX = pointToMove.plotX,
         plotY = pointToMove.plotY;
         
-    seriesFrom.data[indexOfPointToMove].remove(true, true);
+    seriesFrom.data[pointToMove.index].remove(true, true);
     seriesTo.addPoint({
         value,
         plotX,
@@ -40,7 +42,9 @@ Highcharts.chart('container', {
         height: 800,
         events: {
             load: function() {
-                setInterval(()=>movePoint(this), 1500);
+                if(this.series.length>1){
+                    setInterval(()=>movePoint(this), 1500);
+                }
             }
         }
     },
@@ -63,5 +67,5 @@ Highcharts.chart('container', {
         data: getData(1, 50, 8)
     }, {
         data: getData(7, 50, 18)
-    }]
+    }],
 });
