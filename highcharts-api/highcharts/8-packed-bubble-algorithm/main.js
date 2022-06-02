@@ -17,7 +17,7 @@ const movePoint = chart => {
         seriesFrom = randomItems[0],
         seriesTo = randomItems[1];
 
-    while (seriesFrom.data.length === 1){ // to avoid empty parent node
+    while (seriesFrom.data.length === 1) { // to avoid empty parent node
         randomItems = getRandomItems(chart.series, 2),
         seriesFrom = randomItems[0],
         seriesTo = randomItems[1];
@@ -42,7 +42,7 @@ Highcharts.chart('container', {
         height: 800,
         events: {
             load: function() {
-                if(this.series.length>1){
+                if (this.series.length > 1){
                     setInterval(()=>movePoint(this), 1500);
                 }
             }
@@ -67,5 +67,5 @@ Highcharts.chart('container', {
         data: getData(1, 50, 8)
     }, {
         data: getData(7, 50, 18)
-    }],
+    }]
 });
