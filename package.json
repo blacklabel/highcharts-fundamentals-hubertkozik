@@ -1,0 +1,22 @@
+{
+  "name": "highcharts-fundamentals-hubertkozik",
+  "version": "1.0.0",
+  "description": "This training is created for getting familiar with the Highcharts library. During this course, you will work on all the most popular series types, used by Highcharts customers. You will work on Highcharts products, like Maps, Stock, Exporting etc. All the excercises are grouped in the separate folders, containing plain js and html files, with task description. # highcharts",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/blacklabel/highcharts-fundamentals-hubertkozik.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/blacklabel/highcharts-fundamentals-hubertkozik/issues"
+  },
+  "homepage": "https://github.com/blacklabel/highcharts-fundamentals-hubertkozik#readme",
+  "devDependencies": {
+    "eslint": "^8.16.0"
+  }
+}
