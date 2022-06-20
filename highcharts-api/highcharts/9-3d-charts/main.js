@@ -1,3 +1,5 @@
+const { pointCameraDistance } = Highcharts;
+
 // Add z values handler for polygon 3D
 (function (H) {
     /**
@@ -5,7 +7,7 @@
      *
      * License: www.highcharts.com/license
      */
-    var perspective = H.perspective,
+    const perspective = H.perspective,
         pick = H.pick,
         Point = H.Point,
         seriesTypes = H.seriesTypes,
@@ -68,7 +70,7 @@ Highcharts.setOptions({
 
 // Calculate shadows
 const ShadowSeries = (data, chart, numberOfPoints, r) => {
-    var newShadow = [],
+    const newShadow = [],
         cos = Math.cos,
         sin = Math.sin,
         alpha = (2 * Math.PI) / numberOfPoints,
@@ -135,30 +137,42 @@ const chart = new Highcharts.Chart({
             frame: {
                 bottom: {
                     size: 1,
-                    color: 'rgba(0,0,0,1)',
+                    color: 'black',
                 },
                 back: {
                     size: 1,
-                    color: 'rgba(0,0,0,1)',
+                    color: 'black',
                 },
                 side: {
                     size: 1,
-                    color: 'rgba(0,0,0,1)',
+                    color: 'black',
                 },
             },
         },
         events: {
             load: function () {
-                const chart = this;
-
-                const { pointCameraDistance } = Highcharts;
+                const chart = this,
+                    maxSteps = 180,
+                    yellowSeries = chart.series[0],
+                    blueSeries = chart.series[1],
+                    redSeries = chart.series[2],
+                    yellowPoint = yellowSeries.points[0],
+                    bluePoint = blueSeries.points[0],
+                    redPoint = redSeries.points[0],
+                    startX = yellowPoint.x,
+                    startZ = yellowPoint.z,
+                    alpha = (2 * Math.PI) / maxSteps,
+                    redR = 0.3;
 
                 let yellowShadow = ShadowSeries(
                     chart.series[0].data,
                     chart,
                     20,
                     10
-                );
+                ), 
+                    i = 0,
+                    j = 0;
+
                 addShadowSeries(yellowShadow, chart, 'yellow');
 
                 let blueShadow = ShadowSeries(
@@ -176,21 +190,6 @@ const chart = new Highcharts.Chart({
                     2
                 );
                 addShadowSeries(redShadow, chart, 'red');
-
-                const maxSteps = 180,
-                    yellowSeries = chart.series[0],
-                    blueSeries = chart.series[1],
-                    redSeries = chart.series[2],
-                    yellowPoint = yellowSeries.points[0],
-                    bluePoint = blueSeries.points[0],
-                    redPoint = redSeries.points[0],
-                    startX = yellowPoint.x,
-                    startZ = yellowPoint.z,
-                    alpha = (2 * Math.PI) / maxSteps,
-                    redR = 0.3;
-
-                let i = 0,
-                    j = 0;
 
                 setInterval(() => {
                     if (i === maxSteps) {
@@ -311,8 +310,8 @@ const chart = new Highcharts.Chart({
                                 r: 0.5,
                             },
                             stops: [
-                                [0, 'rgba(195,195,255,1)'],
-                                [1, 'rgba(255,255,0,1)'],
+                                [0, 'rgb(195, 195, 255)'],
+                                [1, 'rgb(255, 255, 0)'],
                             ],
                         },
                     },
@@ -336,8 +335,8 @@ const chart = new Highcharts.Chart({
                                 r: 0.5,
                             },
                             stops: [
-                                [0, 'rgba(195,195,255,1)'],
-                                [1, 'rgba(0,0,255,1)'],
+                                [0, 'rgb(195, 195, 255)'],
+                                [1, 'rgb(0, 0, 255)'],
                             ],
                         },
                     },
@@ -361,8 +360,8 @@ const chart = new Highcharts.Chart({
                                 r: 0.5,
                             },
                             stops: [
-                                [0, 'rgba(195,195,255,1)'],
-                                [1, 'rgba(255,0,0,1)'],
+                                [0, 'rgb(195, 195, 255)'],
+                                [1, 'rgb(255, 0, 0)'],
                             ],
                         },
                     },
