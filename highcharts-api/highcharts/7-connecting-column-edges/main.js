@@ -15,18 +15,22 @@ const renderLines = chart => {
     chart.series.forEach(series => {
         if (series.visible) {
             const positions = series.points.map((point, i) => {
-                const temp = [];
                 const { plotLeft, plotHeight, plotTop } = chart,
                     pointHeight = point.shapeArgs.height,
                     pointWidth = point.shapeArgs.width,
-                    x = point.shapeArgs.x;
+                    x = point.shapeArgs.x,
+                    temp = [];
+
                 if (i !== 0) {
                     temp.push(plotLeft + x, plotHeight + plotTop - pointHeight +
                         lineWidth);             
                 }           
+
                 temp.push('M', plotLeft + x + pointWidth  - lineWidth, 
                     plotHeight + plotTop - pointHeight + lineWidth);
+
                 i !== series.points.length -1 && temp.push('L');  
+
                 return temp;
             });
             const group = chart.renderer.g().attr({
