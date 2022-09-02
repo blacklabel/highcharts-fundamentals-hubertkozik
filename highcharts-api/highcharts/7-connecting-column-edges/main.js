@@ -6,24 +6,26 @@ const getData = (min, max, count) => {
 
 const renderLines = chart => {
     const lineWidth = 2; 
-    if(chart.linesGroups = chart.linesGroups || []){
+    if (chart.linesGroups = chart.linesGroups || []) {
         chart.linesGroups.forEach(lineGroup => {
             lineGroup.destroy();
         });
     } 
     chart.linesGroups = [];
     chart.series.forEach(series => {
-        if (series.visible){
+        if (series.visible) {
             const positions = series.points.map((point, i) => {
                 const temp = [];
-                const {plotLeft, plotHeight, plotTop} = chart,
+                const { plotLeft, plotHeight, plotTop } = chart,
                     pointHeight = point.shapeArgs.height,
                     pointWidth = point.shapeArgs.width,
                     x = point.shapeArgs.x;
                 if (i !== 0) {
-                    temp.push(plotLeft + x, plotHeight + plotTop - pointHeight + lineWidth);             
+                    temp.push(plotLeft + x, plotHeight + plotTop - pointHeight +
+                        lineWidth);             
                 }           
-                temp.push('M', plotLeft + x + pointWidth  - lineWidth, plotHeight + plotTop - pointHeight + lineWidth);
+                temp.push('M', plotLeft + x + pointWidth  - lineWidth, 
+                    plotHeight + plotTop - pointHeight + lineWidth);
                 i !== series.points.length -1 && temp.push('L');  
                 return temp;
             });
